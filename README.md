@@ -142,7 +142,14 @@ optionally [install additional extensions after installation](https://kubesphere
 Run the following commands to install KubeSphere on an existing Kubernetes cluster:
 
 ```bash
-helm upgrade --install -n kubesphere-system --create-namespace ks-core https://charts.kubesphere.io/main/ks-core-1.1.3.tgz --debug --wait
+helm upgrade --install -n kubesphere-system --create-namespace ks-core oci://docker.io/openksc/ks-core --version 1.1.5 --debug --wait \
+--set apiserver.image.repository=openksc/ks-apiserver \
+--set console.image.repository=openksc/ks-console \
+--set controller.image.repository=openksc/ks-controller-manager \
+--set kubectl.image.repository=openksc/kubectl \
+--set ksExtensionRepository.image.repository=openksc/ks-extensions-museum \
+--set ksExtensionRepository.image.tag=v1.1.6 \
+--set helmExecutor.image.repository=openksc/kubectl
 ```
 
 ### KubeSphere for hosted Kubernetes services
